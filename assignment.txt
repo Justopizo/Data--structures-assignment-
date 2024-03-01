@@ -1,0 +1,134 @@
+ 
+class Node:
+    def _init_(self, data):
+        self.data = data
+        self.next = None
+
+
+class StackArray:
+    def _init_(self):
+        self.stack = []
+
+    def push(self, item):
+        self.stack.append(item)
+
+    def pop(self):
+        if not self.is_empty():
+            return self.stack.pop()
+        else:
+            return None
+
+    def is_empty(self):
+        return len(self.stack) == 0
+
+    def peek(self):
+        if not self.is_empty():
+            return self.stack[-1]
+        else:
+            return None
+
+
+class StackLinkedList:
+    def _init_(self):
+        self.head = None
+
+    def push(self, item):
+        new_node = Node(item)
+        new_node.next = self.head
+        self.head = new_node
+
+    def pop(self):
+        if self.head:
+            item = self.head.data
+            self.head = self.head.next
+            return item
+        else:
+            return None
+
+    def is_empty(self):
+        return self.head is None
+
+    def peek(self):
+        if self.head:
+            return self.head.data
+        else:
+            return None
+
+
+class QueueArray:
+    def _init_(self):
+        self.queue = []
+
+    def enqueue(self, item):
+        self.queue.append(item)
+
+    def dequeue(self):
+        if not self.is_empty():
+            return self.queue.pop(0)
+        else:
+            return None
+
+    def is_empty(self):
+        return len(self.queue) == 0
+
+    def peek(self):
+        if not self.is_empty():
+            return self.queue[0]
+        else:
+            return None
+
+
+class QueueLinkedList:
+    def _init_(self):
+        self.head = None
+        self.tail = None
+
+    def enqueue(self, item):
+        new_node = Node(item)
+        if self.is_empty():
+            self.head = new_node
+            self.tail = new_node
+        else:
+            self.tail.next = new_node
+            self.tail = new_node
+
+    def dequeue(self):
+        if not self.is_empty():
+            item = self.head.data
+            self.head = self.head.next
+            if self.head is None:
+                self.tail = None
+            return item
+        else:
+            return None
+
+    def is_empty(self):
+        return self.head is None
+
+    def peek(self):
+        if not self.is_empty():
+            return self.head.data
+        else:
+            return None
+
+
+# Example usage:
+stack_arr = StackArray()
+stack_arr.push(1)
+stack_arr.push(2)
+print("Stack using array:", stack_arr.pop(), stack_arr.pop())
+
+stack_ll = StackLinkedList()
+stack_ll.push(1)
+stack_ll.push(2)
+print("Stack using linked list:", stack_ll.pop(), stack_ll.pop())
+
+queue_arr = QueueArray()
+queue_arr.enqueue(1)
+queue_arr.enqueue(2)
+print("Queue using array:", queue_arr.dequeue(), queue_arr.dequeue())
+
+queue_ll = QueueLinkedList()
+queue_ll.enqueue(1)
+queue_ll.enqueue(2)
+print("Queue using linked list:", queue_ll.dequeue(), queue_ll.dequeue()
